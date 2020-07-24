@@ -17,3 +17,8 @@
           return points
       })
   }
+
+  export const getCommits = () => {
+      return fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/github-commit.json')
+      .then(res => res.json())
+  }

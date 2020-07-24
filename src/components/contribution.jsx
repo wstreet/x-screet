@@ -5,8 +5,8 @@ import * as Api from './api'
 
 
 class Contribution extends React.Component {
-  registerShape() {
-    registerShape('polygon', 'boundary-polygon', {
+  registerShape = () => {
+    registerShape('polygon', 'commitShape', {
       draw(cfg, container)  {
         if (!isEmpty(cfg.points)) {
           const group = container.addGroup();
@@ -16,6 +16,7 @@ class Contribution extends React.Component {
             fill: cfg.color,
           };
           const points  = cfg.points;
+          
           const path = [
             ['M', points[0].x, points[0].y],
             ['L', points[1].x, points[1].y],
@@ -23,7 +24,6 @@ class Contribution extends React.Component {
             ['L', points[3].x, points[3].y],
             ['Z']
           ];
-          // debugger
           attrs.path = this.parsePath(path);
           group.addShape('path', {
             attrs
@@ -62,73 +62,71 @@ class Contribution extends React.Component {
     });
   }
   componentDidMount() {
+    this.registerShape()
     async function fetchData() {
-      const data = await Api.getContribution()
+      const data = await Api.getCommits()
   
       const chart = new Chart({
         container: 'contribution',
         autoFit: true,
-        height: 300,
-        padding: [150, 30, 150, 70]
+        height: 100,
+        padding: [30, 10, 10, 30]
         });
         chart.data(data);
         chart.scale({
-        day: {
-            type: 'cat',
-            values: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-        },
-        week: {
-            type: 'cat'
-        },
-        count: {
-            sync: true
-        },
-        date:{
-            type: 'cat'
-        }
+          day: {
+              type: 'cat',
+              values: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+          },
+          week: {
+              type: 'cat'
+          },
+          count: {
+              sync: true
+          },
+          date:{
+              type: 'cat'
+          }
         });
   
         chart.axis('week', {
-        position: 'top',
-        tickLine: null,
-        line: null,
-        label: {
+          position: 'bottom',
+          tickLine: null,
+          line: null,
+          label: {
             offset: 12,
             style: {
-            fontSize: 12,
-            fill: '#666',
-            textBaseline: 'top'
+              fontSize:10,
+              fill: '#666',
+              textBaseline: 'top'
             },
             formatter: val => {
-            if (val === '2') {
-                return 'MAY';
-            } else if (val === '6') {
-                return 'JUN';
-            } else if (val === '10') {
-                return 'JUL';
-            } else if (val === '15') {
-                return 'AUG';
-            } else if (val === '19') {
-                return 'SEP';
-            } else if (val === '24') {
-                return 'OCT';
+              if (val === '2') {
+                  return 'MAY';
+              } else if (val === '6') {
+                  return 'JUN';
+              } else if (val === '10') {
+                  return 'JUL';
+              } else if (val === '15') {
+                  return 'AUG';
+              } else if (val === '19') {
+                  return 'SEP';
+              } else if (val === '24') {
+                  return 'OCT';
+              }
+              return '';
             }
-            return '';
-            }
-        }
-        });
-        chart.axis('day', {
-        grid: null
+          }
         });
         chart.legend(false);
         chart.tooltip({
-        title: 'date',
-        showMarkers: false,
+          title: 'date',
+          showMarkers: false,
         });
         chart.coordinate().reflect('y');
         chart.polygon().position('week*day*date')
-        .color('commits', '#BAE7FF-#1890FF-#0050B3')
-        .shape('boundary-polygon');
+        .color('commits', '#9be9a8-#40c463-#216e39')
+        .shape('commitShape');
   
         chart.interaction('element-active');
         chart.render();
