@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.less';
-import * as serviceWorker from './serviceWorker';
 import Dashboard from './pages/dashboard';
+import './index.less';
+import 'antd/dist/antd.css';
+import * as serviceWorker from './serviceWorker';
+
 
 ReactDOM.render(
   <React.StrictMode>

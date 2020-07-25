@@ -11,6 +11,7 @@
 
 ## API
 * [REST API v3](https://developer.github.com/v3/)
+* [octokit](https://github.com/octokit/core.js)
 ### 接口列表
 * 用户信息：https://api.github.com/users/${username}
 * Repositories List：https://api.github.com/users/${username}/repos
