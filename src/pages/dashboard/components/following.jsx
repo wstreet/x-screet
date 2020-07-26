@@ -4,13 +4,13 @@ import UserList from '../../../components/userList'
 import * as Api from '../../../api'
 
 
-const Followers = () => {
+const Following = () => {
   const [list, setList] = useState([])
-  const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState(0)
   useEffect(() => {
     setLoading(true)
-    Api.getfollowers().then(list => {
+    Api.getFollowing().then(list => {
       setTotal(list.length)
       setList(list.slice(0, 12))
       setLoading(false)
@@ -20,7 +20,8 @@ const Followers = () => {
     <Spin spinning={loading}>
       <UserList users={list} size="large" />
     </Spin>
+    
   )
 }
 
-export default Followers
+export default Following

@@ -3,6 +3,7 @@ import { Col, Container, Row, setConfiguration } from 'react-grid-system';
 import Contribution from './components/contribution'
 import Language from './components/language'
 import Followers from './components/followers'
+import Following from './components/following'
 import BasicInfo from './components/basicInfo'
 import * as Skins from '../../skins';
 import './index.less';
@@ -31,7 +32,7 @@ function Dashboard() {
           </Box>
         </Col>
         <Col md={6} className="center">
-          <Box title="模拟迁徙" bHeight="350px">
+          <Box title="项目分析" bHeight="350px">
             <div>q</div>
             {/* <Chart option={{}} /> */}
           </Box>
@@ -43,8 +44,8 @@ function Dashboard() {
           <Box title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>Followers</div>} bHeight="200px">
             <Followers/>
           </Box>
-          <Box title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>这是个标题right</div>} bHeight="250px" style={{ marginTop: 16 }}>
-          right2
+          <Box title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>Following</div>} bHeight="250px" style={{ marginTop: 16 }}>
+            <Following />
           </Box>
         </Col>
       </Row>

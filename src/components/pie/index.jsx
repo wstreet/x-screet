@@ -13,6 +13,7 @@ class Language extends React.Component {
             data: nextProps.data
           }
         }
+        return null
       }
 
     componentDidMount() {

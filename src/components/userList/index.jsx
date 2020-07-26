@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Tooltip } from 'antd';
-
+import './index.less'
 
 
 const Users = ({ users = [], size = 'normal' }) => {
@@ -10,8 +10,16 @@ const Users = ({ users = [], size = 'normal' }) => {
         users.map(user => (
           <Tooltip placement="topLeft" title={user.login} key={user.login}>
             <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-              <Avatar size={size} src={user.avatar_url} alt={user.login} gap={10} />
-              {/* <div style={{ display: 'inline-block' }}>{user.login}</div> */}
+              <div className="avatar-wrap">
+                <Avatar 
+                  size={size} 
+                  style={{ color: '#f56a00', backgroundColor: '#fde3cf' }} 
+                  alt={user.login}
+                  src={user.avatar_url}
+                >
+                  {user.login}
+                </Avatar>
+              </div>
             </a>
         </Tooltip>
       ))

@@ -1,7 +1,11 @@
 import React from 'react'
 import { Chart, registerShape } from '@antv/g2'
-import { isEmpty } from 'lodash';
+import { isEmpty, find } from 'lodash';
+import moment from 'moment'
 
+const showWeeks = [1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53]
+const defaultCommitColor = `#ebedf0-#15B835-#13A930-#11992C-#108A28-#0E7B23
+                            -#0C6B1F-#0A5C1A-#094D16-#073D12-#052E0D`
 
 class Commit extends React.Component {
   state = {
@@ -14,6 +18,7 @@ class Commit extends React.Component {
         data: nextProps.data
       }
     }
+    return null
   }
 
   registerShape = () => {
@@ -23,7 +28,7 @@ class Commit extends React.Component {
           const group = container.addGroup();
           const attrs = {
             stroke: '#fff',
-            lineWidth: 1,
+            lineWidth: 2,
             fill: cfg.color,
           };
           const points  = cfg.points;
@@ -39,9 +44,6 @@ class Commit extends React.Component {
           group.addShape('path', {
             attrs
           });
-    
-          
-    
           return group;
         }
       }
@@ -62,12 +64,12 @@ class Commit extends React.Component {
     chart.scale({
       day: {
           type: 'cat',
-          values: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+          values: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
       },
       week: {
           type: 'cat'
       },
-      count: {
+      commit: {
           sync: true
       },
       date:{
@@ -75,6 +77,15 @@ class Commit extends React.Component {
       }
     });
 
+    chart.axis('day', {
+      grid: null,
+      label: {
+        style: {
+          fontSize:10,
+          fill: '#dafef9',
+        },
+      }
+    });
     chart.axis('week', {
       position: 'bottom',
       tickLine: null,
@@ -83,24 +94,15 @@ class Commit extends React.Component {
         offset: 12,
         style: {
           fontSize:10,
-          fill: '#666',
+          fill: '#dafef9',
           textBaseline: 'top'
         },
-        formatter: val => {
-          if (val === '2') {
-              return 'MAY';
-          } else if (val === '6') {
-              return 'JUN';
-          } else if (val === '10') {
-              return 'JUL';
-          } else if (val === '15') {
-              return 'AUG';
-          } else if (val === '19') {
-              return 'SEP';
-          } else if (val === '24') {
-              return 'OCT';
+        formatter: (val) => {
+          const currentWeekDay = find(this.props.data, ['week', Number(val)])
+          if (showWeeks.map(w => w+1).includes(currentWeekDay.week)) {
+            return moment(currentWeekDay.date).format('MMM')
           }
-          return '';
+          return ''
         }
       }
     });
@@ -111,7 +113,7 @@ class Commit extends React.Component {
     });
     chart.coordinate().reflect('y');
     chart.polygon().position('week*day*date')
-    .color('commits', '#9be9a8-#40c463-#216e39')
+    .color('commit', defaultCommitColor)
     .shape('commitShape');
 
     chart.interaction('element-active');
