@@ -6,7 +6,7 @@ import * as Api from '../../../api'
 
 
 const Contribution = ({ history }) => {
-  debugger
+  // debugger
   const [commits, setCommits] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {

@@ -7,7 +7,7 @@ import * as Api from '../../../api'
   
 
 const Language = ({ history }) => {
-  debugger
+  // debugger
     const [languageList, setLanguageList] = useState([])
     const [loading, setLoading] = useState(false)
     useEffect(() => {
