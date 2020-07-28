@@ -1,19 +1,48 @@
-.login-root {
-    background-color: #002c45;
+.page-title {
+    color: #aee3fe;
+    text-align: center;
+    position: relative;
+    top: 60px;
+
 }
+
+
 .login-wrapper {
     position: relative;
-    top: 200px;
+    top: 160px;
+    
     .login-form {
         border: 1px solid #0c426f;
         padding: 46px;
+        .login-title {
+            color: #3e82e7;
+            text-align: center;
+            margin-bottom: 30px;
+        }
         .username {
-            color: #002f39;
+            color: #3d6983;
             outline: none;
-            border-color: #002f39;
-            &:hover, &:focus{
-                border-color: #003e4a
+            border-color: #3d6983;
+            background-color: transparent;
+            &.ant-input-affix-wrapper > input.ant-input {
+                background-color: transparent;
+                color: #3d6983;
+                caret-color: #3d6983;
+                &::-webkit-input-placeholder{
+                    color: #3d6983;
+                 }
             }
+            input:-internal-autofill-previewed,
+            input:-internal-autofill-selected {
+                -webkit-text-fill-color: #3d6983 !important;
+                transition: background-color 5000s ease-in-out 0s !important;
+            }
+            input:-webkit-autofill {
+                box-shadow: 0 0 0px 1000px transparent inset !important;
+               }  
+               input:-webkit-autofill:focus {
+                box-shadow: 0 0 0px 1000px transparent inset !important;
+               } 
         }
     }
 }

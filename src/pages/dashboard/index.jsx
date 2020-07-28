@@ -11,7 +11,8 @@ import './index.less';
 setConfiguration({ containerWidths: [1366] })
 const { Box } = Skins.Default;
 
-function Dashboard() {
+function Dashboard({ match }) {
+  const { params: { username } } = match
   return (
     <Container className="dash-container">
       <Row className="header">
@@ -25,10 +26,10 @@ function Dashboard() {
             title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>个人信息</div>}
             bHeight="200px"
           >
-            <BasicInfo />
+            <BasicInfo username={username} />
           </Box>
           <Box title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>语言统计</div>} bHeight="250px" style={{ marginTop: 16 }}>
-            <Language />
+            <Language username={username} />
           </Box>
         </Col>
         <Col md={6} className="center">
@@ -37,15 +38,15 @@ function Dashboard() {
             {/* <Chart option={{}} /> */}
           </Box>
           <Box title="Contributions in the last year" bHeight="104px" style={{ marginTop: 16 }}>
-            <Contribution />
+            <Contribution username={username} />
           </Box>
         </Col>
         <Col md={3} className="right">
           <Box title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>Followers</div>} bHeight="200px">
-            <Followers/>
+            <Followers username={username} />
           </Box>
           <Box title={<div style={{ textAlign: 'left', paddingLeft: 16 }}>Following</div>} bHeight="250px" style={{ marginTop: 16 }}>
-            <Following />
+            <Following username={username} />
           </Box>
         </Col>
       </Row>

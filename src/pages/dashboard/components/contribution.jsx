@@ -5,18 +5,18 @@ import Commit from '../../../components/commit'
 import * as Api from '../../../api'
 
 
-const Contribution = ({ history }) => {
+const Contribution = ({ username }) => {
   // debugger
   const [commits, setCommits] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     setLoading(true)
 
-    Api.getContribution().then(list => {
+    Api.getContribution(username).then(list => {
         setCommits(list)
         setLoading(false)
     })
-  }, [])
+  }, [username])
   return (
     <Spin spinning={loading} >
       <Commit data={commits} id="contribution" />

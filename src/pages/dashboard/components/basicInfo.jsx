@@ -7,17 +7,17 @@ import * as Api from '../../../api'
 import './index.less'
 
 
-const BasicInfo = () => {
+const BasicInfo = ({ username }) => {
   const [user, setUser] = useState({})
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true)
-    Api.getUserInfo().then(user => {
+    Api.getUserInfo(username).then(user => {
       setUser(user)
       setLoading(false)
     })
-  }, [])
+  }, [username])
   return (
     <Spin spinning={loading} >
       <div className="basicinfo">

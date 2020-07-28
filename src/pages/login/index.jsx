@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from "react-router-dom";
 import { Form, Input, Button, message, Row, Col } from 'antd';
-import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import * as Api from '../../api'
 import './index.less';
 
 
 
 const  Login = ({ history }) => {
+  const [loading, setLoading] = useState(false)
   const onFinish = ({ username }) => {
     if (!username) {
       message.error('请输入用户名');
       return;
     }
+    setLoading(true)
     Api.getUserInfo(username).then(res => {
-      if (!res) {
+      setLoading(false)
+      if (res.message === 'Not Found') {
         message.error(`用户${username}不存在，请重新输入`);
         return;
       }
@@ -22,10 +25,13 @@ const  Login = ({ history }) => {
     })
   };
   return (
+     <div>
+        <h2 className="page-title">Github个人数据分析平台</h2>
       <div className="login-wrapper">
       <Row>
-        <Col span={7} offset={12}>
+        <Col width={400} offset={15}>
           <div className="login-form">
+            <h3 className="login-title">用户登录</h3>
             <Form
               onFinish={onFinish}
             >
@@ -39,11 +45,11 @@ const  Login = ({ history }) => {
                   className="username"
                   style={{ width: '100%' }}
                   placeholder="请输入Github用户名"
-                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  suffix={<UserOutlined className="site-form-item-icon" />}
                 />
               </Form.Item>
               <Form.Item>
-                <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+                <Button loading={loading} type="primary" htmlType="submit" style={{ width: '100%' }}>
                   Submit
                 </Button>
               </Form.Item>
@@ -53,6 +59,7 @@ const  Login = ({ history }) => {
         </Col>
       </Row>
     </div>    
+     </div>
   );
 }
 

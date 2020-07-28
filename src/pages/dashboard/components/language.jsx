@@ -6,17 +6,17 @@ import * as Api from '../../../api'
 
   
 
-const Language = ({ history }) => {
+const Language = ({ username }) => {
   // debugger
     const [languageList, setLanguageList] = useState([])
     const [loading, setLoading] = useState(false)
     useEffect(() => {
       setLoading(true)
-      Api.getLanguage().then(list => {
+      Api.getLanguage(username).then(list => {
         setLanguageList(list)
         setLoading(false)
       })
-    }, [])
+    }, [username])
     return (
       <Spin spinning={loading} >
         <Pie data={languageList} id="language" />
