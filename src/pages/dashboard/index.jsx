@@ -5,6 +5,7 @@ import Language from './components/language'
 import Followers from './components/followers'
 import Following from './components/following'
 import BasicInfo from './components/basicInfo'
+import Repos from './components/repos'
 import * as Skins from '../../skins';
 import './index.less';
 
@@ -34,8 +35,7 @@ function Dashboard({ match }) {
         </Col>
         <Col md={6} className="center">
           <Box title="项目分析" bHeight="350px">
-            <div>q</div>
-            {/* <Chart option={{}} /> */}
+            <Repos username={username} />
           </Box>
           <Box title="Contributions in the last year" bHeight="104px" style={{ marginTop: 16 }}>
             <Contribution username={username} />
