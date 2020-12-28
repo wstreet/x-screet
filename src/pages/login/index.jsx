@@ -47,7 +47,7 @@ const  Login = ({ history }) => {
                       style={{ width: '100%' }}
                       placeholder="请输入Github用户名"
                       suffix={<UserOutlined className="site-form-item-icon" />}
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </Form.Item>
                   <Form.Item>
